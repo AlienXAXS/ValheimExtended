@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "assembly_simplemeshcombine", "..\assembly_simplemeshcombine.dll\assembly_simplemeshcombine\assembly_simplemeshcombine.csproj", "{8D4D459A-96AE-4581-92FF-9C0C3911E271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "..\Util\Util.csproj", "{AFC16368-C573-4464-8B17-74FAF4017F91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mod", "Mod", "{F2DDC4D9-81BC-40E6-B922-C7744794D379}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod", "Mod\Mod.csproj", "{34261022-E500-41A3-BB17-E7A5C81594DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D4D459A-96AE-4581-92FF-9C0C3911E271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D4D459A-96AE-4581-92FF-9C0C3911E271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D4D459A-96AE-4581-92FF-9C0C3911E271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D4D459A-96AE-4581-92FF-9C0C3911E271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFC16368-C573-4464-8B17-74FAF4017F91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFC16368-C573-4464-8B17-74FAF4017F91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFC16368-C573-4464-8B17-74FAF4017F91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFC16368-C573-4464-8B17-74FAF4017F91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34261022-E500-41A3-BB17-E7A5C81594DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34261022-E500-41A3-BB17-E7A5C81594DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34261022-E500-41A3-BB17-E7A5C81594DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34261022-E500-41A3-BB17-E7A5C81594DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{34261022-E500-41A3-BB17-E7A5C81594DB} = {F2DDC4D9-81BC-40E6-B922-C7744794D379}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {269DD5E1-8ABE-4024-BF72-616783B7C1AD}
+	EndGlobalSection
+EndGlobal
