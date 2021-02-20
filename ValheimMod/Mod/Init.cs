@@ -6,18 +6,19 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Logger = Mod.Utilities.Logger;
 
 namespace Mod
 {
     public class Init
     {
-        public static Init Instance = _instance ?? new Init();
+        public static Init Instance = _instance ?? (_instance = new Init());
         private static Init _instance;
 
         public void Hook()
         {
-            Util.Logger.Instance.Log("Loading AGN Modpack v0.1!");
-            Util.Logger.Instance.Log("Attempting to hook Harmony patches...");
+            Logger.Log("Loading AGN Modpack v0.1!", "green");
+            Logger.Log("Attempting to hook Harmony patches", "green");
 
             AppDomain.CurrentDomain.AssemblyLoad += CurrentDomainOnAssemblyLoad;
 
@@ -30,16 +31,15 @@ namespace Mod
             }
             catch (Exception ex)
             {
-                Util.Logger.Instance.Log("Unable to patch with Harmony, error below");
-                Util.Logger.Instance.Log($"{ex.Message}\r\n\r\n{ex.StackTrace}");
+                Logger.Log("Unable to patch with Harmony, error follows", "red", ex);
             }
 
-            Util.Logger.Instance.Log("Patching done");
+            Logger.Log("Patching done");
         }
 
         private void CurrentDomainOnAssemblyLoad(object sender, AssemblyLoadEventArgs args)
         {
-            Util.Logger.Instance.Log($"Engine is loading binary {args.LoadedAssembly.FullName}");
+            Logger.Log($"Engine is loading binary {args.LoadedAssembly.FullName}", "yellow");
         }
     }
 }

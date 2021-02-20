@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -70,10 +71,6 @@
     <Compile Include="SimpleMeshCombineMaster.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Util\Util.csproj">
-      <Project>{afc16368-c573-4464-8b17-74faf4017f91}</Project>
-      <Name>Util</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ValheimMod\Mod\Mod.csproj">
       <Project>{34261022-e500-41a3-bb17-e7a5c81594db}</Project>
       <Name>Mod</Name>
@@ -83,4 +80,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y $(TargetDir)Mod.dll D:\SteamLibrary\steamapps\common\Valheim\valheim_Data\Managed\Mod.dll
+xcopy /y $(TargetPath) D:\SteamLibrary\steamapps\common\Valheim\valheim_Data\Managed\</PostBuildEvent>
+  </PropertyGroup>
 </Project>

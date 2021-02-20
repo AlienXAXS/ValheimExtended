@@ -11,9 +11,8 @@ namespace Mod.Harmony.UI.MainMenu.FejdStartup
     {
         private static void Postfix(global::FejdStartup __instance)
         {
-            Utilities.GameVersionHandler.Instance.GameVersion = __instance.m_versionLabel.text;
             global::FejdStartup.instance.m_versionLabel.resizeTextForBestFit = true;
-            global::FejdStartup.instance.m_versionLabel.text = $"Valheim v{Utilities.GameVersionHandler.Instance.GameVersion}\n<color=yellow>AlienX's Mod v{Utilities.ModVersionHandler.GetVersion()}</color>";
+            global::FejdStartup.instance.m_versionLabel.text = $"Valheim v{Version.GetVersionString()}\n<color=yellow>AlienX'ss Mod v{Utilities.ModVersionHandler.GetVersion()}</color>";
         }
     }
 }

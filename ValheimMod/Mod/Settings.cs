@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Mod.Utilities;
 
 namespace Mod
 {
@@ -29,8 +30,8 @@ namespace Mod
         {
             // TODO: Figure out if Linux or not, if linux save along side binary
             _savePath = $"{Environment.GetEnvironmentVariable("USERPROFILE")}\\AppData\\LocalLow\\IronGate\\Valheim\\settings.json";
-            Util.Logger.Instance.Log($"Detected settings path as {_savePath}");
-            Util.Logger.Instance.Log("Attempting to load settings.json");
+            Logger.Log($"Detected settings path as {_savePath}");
+            Logger.Log("Attempting to load settings.json");
             LoadSettings();
         }
 
@@ -57,7 +58,7 @@ namespace Mod
                 if (!System.IO.File.Exists(_savePath))
                 {
                     // Create the initial save file
-                    Util.Logger.Instance.Log("Initial settings.json file not found, will create a template one now...");
+                    Logger.Log("Initial settings.json file not found, will create a template one now...");
                     SaveSettings();
                     return;
                 };
@@ -77,9 +78,9 @@ namespace Mod
             }
             catch (Exception ex)
             {
-                Util.Logger.Instance.Log($"LoadSettings JSON Exception: {ex.Message}\r\n\r\n{ex.StackTrace}");
+                Logger.Log($"LoadSettings JSON Exception: {ex.Message}\r\n\r\n{ex.StackTrace}");
                 if (ex.InnerException != null)
-                    Util.Logger.Instance.Log($"Inner exception: {ex.InnerException.Message}\r\n\r\n{ex.InnerException.StackTrace}");
+                    Logger.Log($"Inner exception: {ex.InnerException.Message}\r\n\r\n{ex.InnerException.StackTrace}");
             }
         }
 
@@ -88,18 +89,18 @@ namespace Mod
             try
             {
             
-                Util.Logger.Instance.Log("Attempting serialisation...");
+                Logger.Log("Attempting serialisation...");
                 var jsonString = UnityEngine.JsonUtility.ToJson(Container);
-                Util.Logger.Instance.Log($"Done, output is:\r\n{jsonString}");
+                Logger.Log($"Done, output is:\r\n{jsonString}");
                 using (var streamWriter = new StreamWriter(_savePath, false))
                 {
                     streamWriter.Write(jsonString);
                 }
-                Util.Logger.Instance.Log("File written");
+                Logger.Log("File written");
             }
             catch (Exception ex)
             {
-                Util.Logger.Instance.Log($"SaveSettings JSON Exception: {ex.Message}\r\n\r\n{ex.StackTrace}");
+                Logger.Log($"SaveSettings JSON Exception: {ex.Message}\r\n\r\n{ex.StackTrace}");
             }
         }
     }

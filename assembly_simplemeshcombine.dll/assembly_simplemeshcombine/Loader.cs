@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Mod.Utilities;
 
 namespace assembly_simplemeshcombine
 {
     // AGN Valheim Loader
     public class Loader
     {
-        public static Loader Instance = _instance ?? new Loader();
+        public static Loader Instance = _instance ?? (_instance = new Loader());
         private static Loader _instance;
 
         private bool isLoaded;
@@ -18,7 +20,10 @@ namespace assembly_simplemeshcombine
             if (isLoaded) return;
             isLoaded = true;
 
-            Util.Logger.Instance.Log("Got pre-hook init, loading mod modules now...");
+            UnityEngine.Debug.Log("Hello, i r here - wooo");
+
+            Logger.RestartLog();
+            Logger.Log("Got pre-hook init, loading mod modules now...");
             Mod.Init.Instance.Hook();
         }
     }

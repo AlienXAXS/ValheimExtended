@@ -11,12 +11,12 @@ namespace Mod.Harmony.System
     [HarmonyPatch(typeof(Console), "Awake")]
     public static class ConsoleOnAwake
     {
-        private static void Postfix(Console __instance)
+        private static void Postfix(ref Console __instance)
         {
-            __instance.Print($"## AGN Gaming Mod Framework v{Utilities.ModVersionHandler.GetVersion()} Loaded ##");
-            __instance.Print("");
-            __instance.Print("type \"agn\" - for commands");
-            __instance.Print("");
+            __instance.AddString($"## AGN Gaming Mod Framework v{Utilities.ModVersionHandler.GetVersion()} Loaded ##");
+            __instance.AddString("");
+            __instance.AddString("type \"agn\" - for commands");
+            __instance.AddString("");
             __instance.m_chatWindow.gameObject.SetActive(false);
         }
     }
