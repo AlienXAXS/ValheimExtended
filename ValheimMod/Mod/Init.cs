@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using Mod.CustomCode;
+using Mod.Events;
 using UnityEngine;
 using Logger = Mod.Utilities.Logger;
 
@@ -24,10 +26,12 @@ namespace Mod
 
             try
             {
-                Settings.Instance.Init();
-
                 var harmony = new HarmonyLib.Harmony("mod.agn.valheimmod");
                 harmony.PatchAll();
+
+                Logger.Log("Hooking into DungeonDB Awake");
+                EventRouter.Instance.GameReady += GameIsReadyEvent;
+                Logger.Log("Hook complete, waiting for DungeonDB to be awake.");
             }
             catch (Exception ex)
             {
@@ -35,6 +39,21 @@ namespace Mod
             }
 
             Logger.Log("Patching done");
+        }
+
+        private Task GameIsReadyEvent()
+        {
+            Utilities.Logger.Log("GameIsReadyEvent detected DungeonDB startup, firing events!");
+
+            Settings.Instance.Init();
+
+            // Don't load the rest on the server, our hooks are enough
+            if ( ZNet.m_isServer ) return Task.CompletedTask;
+
+            new MapSharingMode().Init();
+            new FirstPersonMode().Init();
+
+            return Task.CompletedTask;
         }
 
         private void CurrentDomainOnAssemblyLoad(object sender, AssemblyLoadEventArgs args)

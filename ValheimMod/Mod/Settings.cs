@@ -11,6 +11,7 @@ namespace Mod
     class SettingsContainer
     {
         public bool RememberMapSharingMode;
+        public int NetworkDataRateMultiplier = 1;
     }
 
     class Settings
@@ -18,21 +19,19 @@ namespace Mod
         public static Settings Instance = _instance ?? (_instance = new Settings());
 
         private static Settings _instance;
-        private readonly string _savePath;
+        private string _savePath;
 
         public SettingsContainer Container = new SettingsContainer();
         public enum SettingTypes
         {
-            REMEMBER_MAP_SHARING_MODE
+            REMEMBER_MAP_SHARING_MODE,
+            NETWORK_DATA_RATE_MULTIPLIER
         }
 
         public Settings()
         {
             // TODO: Figure out if Linux or not, if linux save along side binary
-            _savePath = $"{Environment.GetEnvironmentVariable("USERPROFILE")}\\AppData\\LocalLow\\IronGate\\Valheim\\settings.json";
-            Logger.Log($"Detected settings path as {_savePath}");
-            Logger.Log("Attempting to load settings.json");
-            LoadSettings();
+            
         }
 
         public void UpdateSetting(SettingTypes Setting, object value)
@@ -42,6 +41,10 @@ namespace Mod
                 case SettingTypes.REMEMBER_MAP_SHARING_MODE:
                     Container.RememberMapSharingMode = (bool)value;
                     break;
+
+                case SettingTypes.NETWORK_DATA_RATE_MULTIPLIER:
+                    Container.NetworkDataRateMultiplier = (int) value;
+                    break;
             }
 
             SaveSettings();
@@ -49,7 +52,20 @@ namespace Mod
 
         // Just a touching point to get the class instanced.
         public void Init()
-        { }
+        {
+            if (ZNet.m_isServer)
+            {
+                _savePath = $"./settings.json";
+            }
+            else
+            {
+                _savePath = $"{Environment.GetEnvironmentVariable("USERPROFILE")}\\AppData\\LocalLow\\IronGate\\Valheim\\settings.json";
+            }
+            Logger.Log($"Detected settings path as {_savePath}");
+
+            Logger.Log("Attempting to load settings.json");
+            LoadSettings();
+        }
 
         public void LoadSettings()
         {
@@ -75,6 +91,15 @@ namespace Mod
                 if (newObject == null) return;
 
                 Container = newObject;
+
+                // Clamp Network Data Rate Multiplier (1 -> 50)
+                if (!ZNet.m_isServer)
+                {
+                    if (Container.NetworkDataRateMultiplier > 50)
+                        Container.NetworkDataRateMultiplier = 50;
+                    if (Container.NetworkDataRateMultiplier < 1)
+                        Container.NetworkDataRateMultiplier = 1;
+                }
             }
             catch (Exception ex)
             {
@@ -89,14 +114,14 @@ namespace Mod
             try
             {
             
-                Logger.Log("Attempting serialisation...");
+                //Logger.Log("Attempting serialisation...");
                 var jsonString = UnityEngine.JsonUtility.ToJson(Container);
-                Logger.Log($"Done, output is:\r\n{jsonString}");
+                //Logger.Log($"Done, output is:\r\n{jsonString}");
                 using (var streamWriter = new StreamWriter(_savePath, false))
                 {
                     streamWriter.Write(jsonString);
                 }
-                Logger.Log("File written");
+                Logger.Log("Mod Settings file updated!");
             }
             catch (Exception ex)
             {

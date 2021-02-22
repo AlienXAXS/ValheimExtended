@@ -30,7 +30,7 @@ namespace Mod.Harmony.Map
     public static class ChangeMapBehavior
     {
 
-        private static void Prefix(ref float dt, ref Player player, ref Minimap __instance, ref float ___m_exploreTimer, ref float ___m_exploreInterval, ref List<ZNet.PlayerInfo> ___m_tempPlayerInfo) // Set after awake function
+        private static void Prefix(ref float dt, ref global::Player player, ref Minimap __instance, ref float ___m_exploreTimer, ref float ___m_exploreInterval, ref List<ZNet.PlayerInfo> ___m_tempPlayerInfo) // Set after awake function
         {
             float exploreRadius = 100f;
             float explorerTime = ___m_exploreTimer;

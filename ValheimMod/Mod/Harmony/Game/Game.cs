@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HarmonyLib;
+using Mod.Events;
 using UnityEngine;
 using Logger = Mod.Utilities.Logger;
 using Random = System.Random;
@@ -36,21 +37,10 @@ namespace Mod.Harmony.Game
                 if (__instance.m_firstSpawn)
                 {
                     __instance.m_firstSpawn = false;
+                    EventRouter.Instance.PlayerSpawnedInvoke(global::Player.m_localPlayer);
 
                     Random rnd = new Random(DateTime.Now.Second);
                     Chat.instance.SendText(Talker.Type.Shout, RandomShitToSay[rnd.Next(0,RandomShitToSay.Count-1)]);
-
-                    var logLine = $"Player respawn detected PID:{__instance.m_playerProfile.m_playerID}, setting options.";
-                    Logger.Log(logLine);
-                    Console.instance.Print(logLine);
-
-                    //__instance.m_playerProfile.m_playerID
-
-                    
-
-                    Logger.Log($"Setting SetPublicReferencePosition = {Settings.Instance.Container.RememberMapSharingMode}");
-                    ZNet.instance.SetPublicReferencePosition(Settings.Instance.Container.RememberMapSharingMode);
-
                 }
                 GC.Collect();
             }
