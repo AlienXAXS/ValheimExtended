@@ -30,7 +30,7 @@ namespace Mod.Utilities
             lock (_lockable)
             {
                 var dt = DateTime.Now;
-                var compiledMessage = $"[{dt.Year}/{dt.Month}/{dt.Day} {dt.Hour}:{dt.Minute}:{dt.Second}] | {message}";
+                var compiledMessage = $"AlienX's Mod: [{dt.Year}/{dt.Month}/{dt.Day} {dt.Hour}:{dt.Minute}:{dt.Second}] | {message}";
 
                 try
                 {
