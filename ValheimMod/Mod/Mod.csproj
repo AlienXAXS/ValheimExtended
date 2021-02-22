@@ -136,7 +136,7 @@
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\..\..\Unity Crap\Valheim\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule">
       <HintPath>..\..\..\..\Unity Crap\Valheim\Managed\UnityEngine.UIElementsModule.dll</HintPath>
@@ -146,7 +146,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomCode\DataRateFix.cs" />
     <Compile Include="CustomCode\FirstPersonMode.cs" />
+    <Compile Include="CustomCode\GUI\DebugHud.cs" />
     <Compile Include="CustomCode\MapSharingMode.cs" />
     <Compile Include="Events\AsyncEvents.cs" />
     <Compile Include="Events\EventRouter.cs" />
@@ -155,7 +157,7 @@
     <Compile Include="Harmony\FejdStartup\FejdStartupHook.cs" />
     <Compile Include="Harmony\Game\Game.cs" />
     <Compile Include="Harmony\Map\MapSettingsMemory.cs" />
-    <Compile Include="Harmony\Network\DataRatePatcher.cs" />
+    <Compile Include="Harmony\Network\ZNetHook.cs" />
     <Compile Include="Harmony\Player\PlayerHook.cs" />
     <Compile Include="Harmony\System\Console.cs" />
     <Compile Include="Harmony\Map\SharedMapSystem.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="Utilities\ModVersionHandler.cs" />
     <Compile Include="Utilities\Raycast.cs" />
     <Compile Include="Utilities\ThreadManager.cs" />
+    <Compile Include="Utilities\Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

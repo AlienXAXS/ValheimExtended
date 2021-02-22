@@ -12,6 +12,7 @@ namespace Mod.CustomCode
     {
         public void Init()
         {
+            Utilities.Logger.Log("Init FirstPersonMode");
             EventRouter.Instance.CameraAwake += OnCameraAwake;
             EventRouter.Instance.CameraUpdate += OnCameraUpdate;
         }

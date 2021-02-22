@@ -113,15 +113,11 @@ namespace Mod
         {
             try
             {
-            
-                //Logger.Log("Attempting serialisation...");
                 var jsonString = UnityEngine.JsonUtility.ToJson(Container);
-                //Logger.Log($"Done, output is:\r\n{jsonString}");
                 using (var streamWriter = new StreamWriter(_savePath, false))
                 {
                     streamWriter.Write(jsonString);
                 }
-                Logger.Log("Mod Settings file updated!");
             }
             catch (Exception ex)
             {

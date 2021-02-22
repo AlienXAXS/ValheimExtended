@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mod.CustomCode;
 using Mod.Events;
+using Steamworks;
 using UnityEngine;
 using Logger = Mod.Utilities.Logger;
 
@@ -16,6 +17,8 @@ namespace Mod
     {
         public static Init Instance = _instance ?? (_instance = new Init());
         private static Init _instance;
+
+        private bool hasLoaded = false;
 
         public void Hook()
         {
@@ -43,15 +46,35 @@ namespace Mod
 
         private Task GameIsReadyEvent()
         {
-            Utilities.Logger.Log("GameIsReadyEvent detected DungeonDB startup, firing events!");
+            if ( hasLoaded ) return Task.CompletedTask;
+            hasLoaded = true;
+
+            Utilities.Logger.Log("GameIsReadyEvent detected game startup, firing events!");
 
             Settings.Instance.Init();
 
             // Don't load the rest on the server, our hooks are enough
-            if ( ZNet.m_isServer ) return Task.CompletedTask;
+            Utilities.Logger.Log($"Are we a server? {Utilities.Tools.IsServer()}");
 
-            new MapSharingMode().Init();
-            new FirstPersonMode().Init();
+            if (Utilities.Tools.IsServer())
+            {
+                new DataRateFix().Init(true);
+            }
+            else
+            {
+                new MapSharingMode().Init();
+                new FirstPersonMode().Init();
+                new DataRateFix().Init();
+
+                EventRouter.Instance.PlayerSpawned += player =>
+                {
+                    var go = new GameObject("Mod");
+                    UnityEngine.Object.DontDestroyOnLoad(go);
+                    go.AddComponent<CustomCode.GUI.DebugHud>();
+
+                    return Task.CompletedTask;
+                };
+            }
 
             return Task.CompletedTask;
         }

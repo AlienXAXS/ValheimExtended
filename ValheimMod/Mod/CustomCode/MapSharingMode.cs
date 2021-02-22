@@ -12,6 +12,7 @@ namespace Mod.CustomCode
     {
         public void Init()
         {
+            Utilities.Logger.Log("Init MapSharingMode");
             EventRouter.Instance.PlayerSpawned += OnPlayerSpawned;
         }
 

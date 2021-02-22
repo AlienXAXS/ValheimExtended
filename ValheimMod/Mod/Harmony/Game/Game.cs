@@ -10,6 +10,34 @@ using Random = System.Random;
 
 namespace Mod.Harmony.Game
 {
+
+    [HarmonyPatch(typeof(global::Game), "Ping")]
+    public static class GamePingCapture
+    {
+        private static bool Prefix()
+        {
+            ZRoutedRpc.instance.InvokeRoutedRPC("Ping", new object[]
+            {
+                Time.time
+            });
+
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(global::Game), "RPC_Pong")]
+    public static class GamePongCapture
+    {
+        public static int PingTime;
+
+        private static bool Prefix(long sender, float time)
+        {
+            PingTime = (int)((Time.time - time)*1000f);
+            return false;
+        }
+
+    }
+
     [HarmonyPatch(typeof(global::Game), "UpdateRespawn")]
     public static class GameOverride
     {

@@ -7,7 +7,7 @@ using HarmonyLib;
 
 namespace Mod.Harmony.DungeonDB
 {
-    [HarmonyPatch(typeof(global::DungeonDB), "Start")]
+    [HarmonyPatch(typeof(global::FejdStartup), "Start")]
     public class FejdStartupHook
     {
         private static void Postfix()

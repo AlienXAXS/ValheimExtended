@@ -10,9 +10,24 @@ namespace Mod.Events
     public class EventRouter
     {
         public static EventRouter Instance = _instance ?? (_instance = new EventRouter());
-        private static EventRouter _instance;
+        private static readonly EventRouter _instance;
 
-        internal readonly AsyncEvent<Func<Task>> GameReadyEvent = new AsyncEvent<Func<Task>>();
+        // Server started
+        private readonly AsyncEvent<Func<Task>> ServerStartedEvent = new AsyncEvent<Func<Task>>();
+        public event Func<Task> ServerStarted
+        {
+            add => ServerStartedEvent.Add(value);
+            remove => ServerStartedEvent.Remove(value);
+        }
+        public void ServerStartedInvoke()
+        {
+            if (!ServerStartedEvent.HasSubscribers) return;
+            foreach (var subscriber in ServerStartedEvent.Subscriptions)
+                subscriber.Invoke();
+        }
+
+        // Game is ready
+        private readonly AsyncEvent<Func<Task>> GameReadyEvent = new AsyncEvent<Func<Task>>();
         public event Func<Task> GameReady
         {
             add => GameReadyEvent.Add(value);
@@ -26,7 +41,7 @@ namespace Mod.Events
         }
 
         // Player Spawned
-        internal readonly AsyncEvent<Func<Player, Task>> PlayerSpawnedEvent = new AsyncEvent<Func<Player, Task>>();
+        private readonly AsyncEvent<Func<Player, Task>> PlayerSpawnedEvent = new AsyncEvent<Func<Player, Task>>();
         public event Func<Player, Task> PlayerSpawned
         {
             add => PlayerSpawnedEvent.Add(value);
@@ -40,7 +55,7 @@ namespace Mod.Events
         }
 
         // Player Death
-        internal readonly AsyncEvent<Func<Player, Task>> PlayerDeathEvent = new AsyncEvent<Func<Player, Task>>();
+        private readonly AsyncEvent<Func<Player, Task>> PlayerDeathEvent = new AsyncEvent<Func<Player, Task>>();
         public event Func<Player, Task> PlayerDeath
         {
             add => PlayerDeathEvent.Add(value);
@@ -54,7 +69,7 @@ namespace Mod.Events
         }
 
         // Attack
-        internal readonly AsyncEvent<Func<Player, HitData, Task>> PlayerAttackEvent = new AsyncEvent<Func<Player, HitData, Task>>();
+        private readonly AsyncEvent<Func<Player, HitData, Task>> PlayerAttackEvent = new AsyncEvent<Func<Player, HitData, Task>>();
         public event Func<Player, HitData, Task> PlayerAttack
         {
             add => PlayerAttackEvent.Add(value);
@@ -68,7 +83,7 @@ namespace Mod.Events
         }
 
         // On Local Player Server Connected
-        internal readonly AsyncEvent<Func<string, Task>> LocalPlayerServerConnectedEvent = new AsyncEvent<Func<string, Task>>();
+        private readonly AsyncEvent<Func<string, Task>> LocalPlayerServerConnectedEvent = new AsyncEvent<Func<string, Task>>();
         public event Func<string, Task> LocalPlayerServerConnected
         {
             add => LocalPlayerServerConnectedEvent.Add(value);
@@ -82,7 +97,7 @@ namespace Mod.Events
         }
 
         // On Local Player Server Disconnected
-        internal readonly AsyncEvent<Func<Task>> LocalPlayerServerDisconnectedEvent = new AsyncEvent<Func<Task>>();
+        private readonly AsyncEvent<Func<Task>> LocalPlayerServerDisconnectedEvent = new AsyncEvent<Func<Task>>();
         public event Func<Task> LocalPlayerServerDisconnected
         {
             add => LocalPlayerServerDisconnectedEvent.Add(value);
@@ -96,7 +111,7 @@ namespace Mod.Events
         }
 
         // On Camera Update
-        internal readonly AsyncEvent<Func<GameCamera, float, Task>> CameraUpdateEvent = new AsyncEvent<Func<GameCamera, float, Task>>();
+        private readonly AsyncEvent<Func<GameCamera, float, Task>> CameraUpdateEvent = new AsyncEvent<Func<GameCamera, float, Task>>();
         public event Func<GameCamera, float, Task> CameraUpdate
         {
             add => CameraUpdateEvent.Add(value);
@@ -110,7 +125,7 @@ namespace Mod.Events
         }
 
         // On Camera Awake
-        internal readonly AsyncEvent<Func<GameCamera, Task>> CameraAwakeEvent = new AsyncEvent<Func<GameCamera, Task>>();
+        private readonly AsyncEvent<Func<GameCamera, Task>> CameraAwakeEvent = new AsyncEvent<Func<GameCamera, Task>>();
         public event Func<GameCamera, Task> CameraAwake
         {
             add => CameraAwakeEvent.Add(value);
@@ -124,7 +139,7 @@ namespace Mod.Events
         }
 
         // On Player Update
-        internal readonly AsyncEvent<Func<Player, Task>> PlayerUpdateEvent = new AsyncEvent<Func<Player, Task>>();
+        private readonly AsyncEvent<Func<Player, Task>> PlayerUpdateEvent = new AsyncEvent<Func<Player, Task>>();
         public event Func<Player, Task> PlayerUpdate
         {
             add => PlayerUpdateEvent.Add(value);

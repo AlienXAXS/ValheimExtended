@@ -29,7 +29,10 @@ namespace Mod.Harmony.System
             var myself = new ConsoleReceiveInput();
             var cnsl = Console.instance;
             string inputText = __instance.m_input.text;
-            if (inputText.StartsWith("agn"))
+            if (inputText == "ping")
+            {
+                cnsl.AddString("Sorry, the ping command was removed in this mod");
+            }else if (inputText.StartsWith("agn"))
             {
                 string[] inputArray = inputText.Split(' ');
                 if (inputArray.Length == 1)
