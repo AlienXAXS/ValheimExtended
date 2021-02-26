@@ -40,6 +40,10 @@
     <Reference Include="0Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lib.Harmony.2.0.4\lib\net35\0Harmony.dll</HintPath>
     </Reference>
+    <Reference Include="assembly_guiutils, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Unity Crap\Valheim\Managed\assembly_guiutils.dll</HintPath>
+    </Reference>
     <Reference Include="assembly_steamworks, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Unity Crap\Valheim\Managed\assembly_steamworks.dll</HintPath>
@@ -120,6 +124,10 @@
     <Reference Include="UnityEngine.JSONSerializeModule">
       <HintPath>..\..\..\..\Unity Crap\Valheim\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.LocalizationModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Unity Crap\Valheim\Managed\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
       <HintPath>..\..\..\..\Unity Crap\Valheim\Managed\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
@@ -150,18 +158,33 @@
     <Compile Include="CustomCode\FirstPersonMode.cs" />
     <Compile Include="CustomCode\GUI\DebugHud.cs" />
     <Compile Include="CustomCode\MapSharingMode.cs" />
+    <Compile Include="CustomCode\WishboneMegingjordEquipable.cs" />
     <Compile Include="Events\AsyncEvents.cs" />
     <Compile Include="Events\EventRouter.cs" />
+    <Compile Include="Events\GameCameraEvents.cs" />
+    <Compile Include="Events\GameEvents.cs" />
+    <Compile Include="Events\HumanoidEvents.cs" />
     <Compile Include="Events\InputKeyRouter.cs" />
+    <Compile Include="Events\ItemEvents.cs" />
+    <Compile Include="Events\PlayerEvents.cs" />
     <Compile Include="Harmony\Camera\GameCameraHook.cs" />
     <Compile Include="Harmony\FejdStartup\FejdStartupHook.cs" />
+    <Compile Include="Harmony\FejdStartup\RememberIPAndPasswordUI.cs" />
     <Compile Include="Harmony\Game\Game.cs" />
+    <Compile Include="CustomCode\Items\CustomSlotHandler.cs" />
+    <Compile Include="Harmony\Items\FermenterProgress.cs" />
+    <Compile Include="Harmony\Items\ItemDataOverrides.cs" />
+    <Compile Include="CustomCode\Items\CustomItemSlot.cs" />
     <Compile Include="Harmony\Map\MapSettingsMemory.cs" />
     <Compile Include="Harmony\Network\ZNetHook.cs" />
+    <Compile Include="Harmony\Player\HumanoidHook.cs" />
     <Compile Include="Harmony\Player\PlayerHook.cs" />
+    <Compile Include="Harmony\Player\TeleportFix.cs" />
     <Compile Include="Harmony\System\Console.cs" />
     <Compile Include="Harmony\Map\SharedMapSystem.cs" />
     <Compile Include="Harmony\Trees\TreeController.cs" />
+    <Compile Include="Harmony\UI\Inventory\AutoRepair.cs" />
+    <Compile Include="Harmony\UI\Inventory\DeleteInventoryItem.cs" />
     <Compile Include="Harmony\UI\MainMenu\FejdStartup\FejdStartupOverrides.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

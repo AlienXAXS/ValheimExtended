@@ -12,6 +12,8 @@ namespace Mod
     {
         public bool RememberMapSharingMode;
         public int NetworkDataRateMultiplier = 1;
+        public string LastIPAddress = "";
+        public string LastPassword = "";
     }
 
     class Settings
@@ -25,13 +27,14 @@ namespace Mod
         public enum SettingTypes
         {
             REMEMBER_MAP_SHARING_MODE,
-            NETWORK_DATA_RATE_MULTIPLIER
+            NETWORK_DATA_RATE_MULTIPLIER,
+            LAST_IP_ADDRESS,
+            LAST_PASSWORD
         }
 
         public Settings()
         {
-            // TODO: Figure out if Linux or not, if linux save along side binary
-            
+
         }
 
         public void UpdateSetting(SettingTypes Setting, object value)
@@ -45,6 +48,20 @@ namespace Mod
                 case SettingTypes.NETWORK_DATA_RATE_MULTIPLIER:
                     Container.NetworkDataRateMultiplier = (int) value;
                     break;
+
+                case SettingTypes.LAST_IP_ADDRESS:
+                    if (value != null)
+                        Container.LastIPAddress = (string) value;
+                    else
+                        Utilities.Logger.Log("Attempted to write a null value to LAST_IP_ADDRESS");
+                    break;
+
+                case SettingTypes.LAST_PASSWORD:
+                    if (value != null)
+                        Container.LastPassword = (string) value;
+                    else
+                        Utilities.Logger.Log("Attempted to write a null value to LAST_PASSWORD");
+                    break;
             }
 
             SaveSettings();
@@ -53,7 +70,7 @@ namespace Mod
         // Just a touching point to get the class instanced.
         public void Init()
         {
-            if (ZNet.m_isServer)
+            if (Utilities.Tools.IsServer())
             {
                 _savePath = $"./settings.json";
             }

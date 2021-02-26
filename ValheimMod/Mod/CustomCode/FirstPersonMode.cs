@@ -13,8 +13,8 @@ namespace Mod.CustomCode
         public void Init()
         {
             Utilities.Logger.Log("Init FirstPersonMode");
-            EventRouter.Instance.CameraAwake += OnCameraAwake;
-            EventRouter.Instance.CameraUpdate += OnCameraUpdate;
+            EventRouter.Instance.GameCameraEvents.CameraAwake += OnCameraAwake;
+            EventRouter.Instance.GameCameraEvents.CameraUpdate += OnCameraUpdate;
         }
 
         private Task OnCameraUpdate(GameCamera instance, float dt)

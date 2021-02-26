@@ -33,7 +33,7 @@ namespace Mod
                 harmony.PatchAll();
 
                 Logger.Log("Hooking into DungeonDB Awake");
-                EventRouter.Instance.GameReady += GameIsReadyEvent;
+                EventRouter.Instance.GameEvents.GameReady += GameIsReadyEvent;
                 Logger.Log("Hook complete, waiting for DungeonDB to be awake.");
             }
             catch (Exception ex)
@@ -65,8 +65,9 @@ namespace Mod
                 new MapSharingMode().Init();
                 new FirstPersonMode().Init();
                 new DataRateFix().Init();
+                new WishboneMegingjordEquipable().Init();
 
-                EventRouter.Instance.PlayerSpawned += player =>
+                EventRouter.Instance.PlayerEvents.PlayerSpawned += player =>
                 {
                     var go = new GameObject("Mod");
                     UnityEngine.Object.DontDestroyOnLoad(go);

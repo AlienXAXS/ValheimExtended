@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -9,9 +10,6 @@ namespace Mod.CustomCode.GUI
 {
     public class DebugHud : MonoBehaviour
     {
-
-        private bool _firstRun = true;
-
         private float timeRemaining = 10;
         private const float defaultTime = 10;
 
@@ -19,6 +17,9 @@ namespace Mod.CustomCode.GUI
 
         private string totalBytesSent;
         private string totalBytesRecv;
+        private int Ping;
+        private float localNetQuality;
+        private float remoteNetQuality;
 
         private void Start()
         {
@@ -35,9 +36,21 @@ namespace Mod.CustomCode.GUI
 
                 if (ZNet.instance != null)
                 {
-                    ZNet.instance.GetNetStats(out var totalSent, out var totalRecv);
-                    totalBytesSent = $"{totalSent / 1024}";
-                    totalBytesRecv = $"{totalRecv / 1024}";
+                    try
+                    {
+                        ZNet.instance.GetNetStats(out var localQuality, out var remoteQuality, out int PingStat, out var totalSent, out var totalRecv);
+                        totalBytesSent = $"{(int)totalSent / 1024}";
+                        totalBytesRecv = $"{(int)totalRecv / 1024}";
+                        Ping = PingStat;
+
+                        localNetQuality = localQuality;
+                        remoteNetQuality = remoteQuality;
+                    }
+                    catch (Exception)
+                    {
+                        totalBytesSent = "?";
+                        totalBytesRecv = "?";
+                    }
                 }
             }
             else
@@ -52,8 +65,8 @@ namespace Mod.CustomCode.GUI
 
         private void OnGUI()
         {
-            //GUILayout.Window(133723, new Rect(7f, 10f, Screen.width - 10f, 20f), new UnityEngine.GUI.WindowFunction(GUIWindowFunctionHandler), "", new GUILayoutOption[0]);
-            GUILayout.Label($"<color=white>Ping: {Harmony.Game.GamePongCapture.PingTime}ms | Pos: {playerPosition} | Net: {totalBytesSent}kb/s out {totalBytesRecv}kb/s in</color>", new GUIStyle() { margin = new RectOffset(15, 5, 5, 5), fontSize = 16}, new GUILayoutOption[0]);
+            //GUILayout.Window(133723, new Rect(4f, 16f, Screen.width - 10f, 26f), new UnityEngine.GUI.WindowFunction(GUIWindowFunctionHandler), "", new GUILayoutOption[0]);
+            GUILayout.Label($"<color=white>Ping: {Ping}ms | Pos: {playerPosition} | Network: Transmit:{totalBytesRecv}kb/s Recieve:{totalBytesSent}kb/s LocalQuality:{(int)localNetQuality * 100f}% RemoteQuality:{(int)remoteNetQuality * 100f}%</color>", new GUIStyle() { margin = new RectOffset(15, 5, 5, 5), fontSize = 16 }, new GUILayoutOption[0]);
         }
 
         private void GUIWindowFunctionHandler(int windowId)
@@ -63,7 +76,6 @@ namespace Mod.CustomCode.GUI
             {
 
                 GUILayout.BeginHorizontal(new GUILayoutOption[0]);
-                GUILayout.Label("This is a big fat test label, wooo", new GUILayoutOption[0]);
 
             }
             catch (Exception ex)

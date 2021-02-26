@@ -12,9 +12,9 @@ namespace Mod.CustomCode
         public void Init(bool serverOnly = false)
         {
             if (!serverOnly)
-                EventRouter.Instance.PlayerSpawned += OnPlayerSpawned;
+                EventRouter.Instance.PlayerEvents.PlayerSpawned += OnPlayerSpawned;
 
-            EventRouter.Instance.ServerStarted += OnServerStarted;
+            EventRouter.Instance.GameEvents.ServerStarted += OnServerStarted;
         }
 
         private Task OnServerStarted()

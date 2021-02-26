@@ -23,7 +23,7 @@ namespace Mod.Harmony.Player
                 return;
             }
 
-            EventRouter.Instance.PlayerUpdateEventInvoke(__instance);
+            EventRouter.Instance.PlayerEvents.PlayerUpdateEventInvoke(__instance);
 
             bool acceptInput = __instance.TakeInput();
             if (acceptInput)

@@ -67,6 +67,16 @@ namespace Mod.Harmony.System
                                 myself.RaycastTest();
                             break;
 
+                        case "sleep":
+                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx")
+                                EnvMan.instance.SkipToMorning();
+                            break;
+
+                        case "fly":
+                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx")
+                                GameCamera.instance.ToggleFreeFly();
+                            break;
+
                         default:
                             Console.instance.AddString($"Unknown command {givenCommand}");
                             break;

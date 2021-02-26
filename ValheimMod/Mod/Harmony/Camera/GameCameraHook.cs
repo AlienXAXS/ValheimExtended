@@ -13,7 +13,7 @@ namespace Mod.Harmony.Camera
     {
         private static void Postfix(GameCamera __instance)
         {
-            EventRouter.Instance.CameraAwakeEventInvoke(__instance);
+            EventRouter.Instance.GameCameraEvents.CameraAwakeEventInvoke(__instance);
         }
     }
 
@@ -22,7 +22,7 @@ namespace Mod.Harmony.Camera
     {
         private static void Postfix(GameCamera __instance, float dt)
         {
-            EventRouter.Instance.CameraUpdateEventInvoke(__instance, dt);
+            EventRouter.Instance.GameCameraEvents.CameraUpdateEventInvoke(__instance, dt);
         }
     }
 }

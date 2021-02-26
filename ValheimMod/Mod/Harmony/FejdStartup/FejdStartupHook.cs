@@ -12,7 +12,7 @@ namespace Mod.Harmony.DungeonDB
     {
         private static void Postfix()
         {
-            Events.EventRouter.Instance.GameReadyInvoke();
+            Events.EventRouter.Instance.GameEvents.GameReadyInvoke();
         }
     }
 }
