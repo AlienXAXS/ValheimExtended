@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mod.Events
 {
@@ -15,7 +11,7 @@ namespace Mod.Events
             add => _isItemEquipableEvent.Add(value);
             remove => _isItemEquipableEvent.Remove(value);
         }
-        public async Task<bool> IsItemEquipableEventInvoke(bool initialResult, ItemDrop.ItemData itemData)
+        public bool IsItemEquipableEventInvoke(bool initialResult, ItemDrop.ItemData itemData)
         {
             if (!_isItemEquipableEvent.HasSubscribers) return initialResult;
 

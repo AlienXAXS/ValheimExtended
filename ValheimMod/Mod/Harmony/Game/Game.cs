@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using HarmonyLib;
 using Mod.Events;
-using UnityEngine;
-using Logger = Mod.Utilities.Logger;
 using Random = System.Random;
 
 namespace Mod.Harmony.Game
