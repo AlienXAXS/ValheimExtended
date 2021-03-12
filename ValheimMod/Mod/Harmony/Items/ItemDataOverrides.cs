@@ -3,9 +3,11 @@ using Mod.Events;
 
 namespace Mod.Harmony.Items
 {
+    /*
     [HarmonyPatch(typeof(ItemDrop.ItemData), "IsEquipable")]
     public class ItemDataOverrides
     {
+        
         private static void Postfix(ref bool __result, ItemDrop.ItemData __instance)
         {
             Utilities.Logger.Log($"IsEquipable Postfix | Game Result: {__result} | Item: {__instance.m_shared.m_name}");
@@ -15,5 +17,7 @@ namespace Mod.Harmony.Items
             __result = result;
 
         }
-    }
+        
+}
+    */
 }

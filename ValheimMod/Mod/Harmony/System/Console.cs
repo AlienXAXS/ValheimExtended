@@ -54,22 +54,22 @@ namespace Mod.Harmony.System
                             break;
 
                         case "spawn": //agn spawn prefab_name
-                            if ( global::Player.m_localPlayer.GetPlayerName() == "Alienx" )
+                            if ( global::Player.m_localPlayer.GetPlayerName() == "Alienx" || global::Player.m_localPlayer.GetPlayerName() == "Mrawesome")
                                 myself.SpawnObject(inputArray);
                             break;
 
                         case "raycast":
-                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx")
+                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx" || global::Player.m_localPlayer.GetPlayerName() == "Mrawesome")
                                 myself.RaycastTest();
                             break;
 
                         case "sleep":
-                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx")
+                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx" || global::Player.m_localPlayer.GetPlayerName() == "Mrawesome")
                                 EnvMan.instance.SkipToMorning();
                             break;
 
                         case "fly":
-                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx")
+                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx" || global::Player.m_localPlayer.GetPlayerName() == "Mrawesome")
                                 GameCamera.instance.ToggleFreeFly();
                             break;
 
