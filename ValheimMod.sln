@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29926.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "assembly_simplemeshcombine", "assembly_simplemeshcombine.dll\assembly_simplemeshcombine\assembly_simplemeshcombine.csproj", "{8D4D459A-96AE-4581-92FF-9C0C3911E271}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod", "ValheimMod\Mod\Mod.csproj", "{34261022-E500-41A3-BB17-E7A5C81594DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly Publicizer", "Assembly Publicizer", "{07C75454-04C5-45DC-9694-74CFEA2E9C9E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clean Me", "Bob\Clean Me.csproj", "{690166DA-FB21-47BD-8F0E-27CB4EDE0822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,17 +25,12 @@ Global
 		{34261022-E500-41A3-BB17-E7A5C81594DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34261022-E500-41A3-BB17-E7A5C81594DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34261022-E500-41A3-BB17-E7A5C81594DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{690166DA-FB21-47BD-8F0E-27CB4EDE0822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{690166DA-FB21-47BD-8F0E-27CB4EDE0822}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{690166DA-FB21-47BD-8F0E-27CB4EDE0822}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{690166DA-FB21-47BD-8F0E-27CB4EDE0822}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{34261022-E500-41A3-BB17-E7A5C81594DB} = {F2DDC4D9-81BC-40E6-B922-C7744794D379}
-		{690166DA-FB21-47BD-8F0E-27CB4EDE0822} = {07C75454-04C5-45DC-9694-74CFEA2E9C9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {269DD5E1-8ABE-4024-BF72-616783B7C1AD}

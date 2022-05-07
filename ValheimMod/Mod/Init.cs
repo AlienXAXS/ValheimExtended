@@ -52,13 +52,11 @@ namespace Mod
 
             if (Utilities.Tools.IsServer())
             {
-                new DataRateFix().Init(true);
             }
             else
             {
                 new MapSharingMode().Init();
                 new FirstPersonMode().Init();
-                new DataRateFix().Init();
                 new WishboneMegingjordEquipable().Init();
 
                 EventRouter.Instance.PlayerEvents.PlayerSpawned += player =>

@@ -17,10 +17,10 @@ namespace Mod.Harmony.System
         }
     }
 
-    [HarmonyPatch(typeof(Console), "InputText")]
+    [HarmonyPatch(typeof(Terminal), "InputText")]
     public class ConsoleReceiveInput
     {
-        private static void Postfix(Console __instance)
+        private static void Postfix(Terminal __instance)
         {
             var myself = new ConsoleReceiveInput();
             var cnsl = Console.instance;
@@ -40,37 +40,20 @@ namespace Mod.Harmony.System
                     var givenCommand = inputArray[1];
                     switch (givenCommand)
                     {
-                        case "help":
-                            cnsl.AddString("AGN Mod Help");
-                            cnsl.AddString("  \"agn mapsync\" - Other players also reveal the fog of war on your map.");
-                            cnsl.AddString("  \"agn datarate\" - Dynamically change the network data rate (Given value is a multiplier, so 2 would be 100kb/s).");
-                            break;
-                        case "mapsync":
-                            Console.instance.AddString("<color=yellow>Map Sync is controlled by you sharing your position on the map. If you have your position shared other players will get your map data.</color>");
-                            break;
-
-                        case "datarate":
-                            myself.ChangeNetworkDataRate(inputArray);
-                            break;
-
                         case "spawn": //agn spawn prefab_name
-                            if ( global::Player.m_localPlayer.GetPlayerName() == "Alienx" || global::Player.m_localPlayer.GetPlayerName() == "Mrawesome")
-                                myself.SpawnObject(inputArray);
+                            myself.SpawnObject(inputArray);
                             break;
 
                         case "raycast":
-                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx" || global::Player.m_localPlayer.GetPlayerName() == "Mrawesome")
-                                myself.RaycastTest();
+                            myself.RaycastTest();
                             break;
 
                         case "sleep":
-                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx" || global::Player.m_localPlayer.GetPlayerName() == "Mrawesome")
-                                EnvMan.instance.SkipToMorning();
+                            EnvMan.instance.SkipToMorning();
                             break;
 
                         case "fly":
-                            if (global::Player.m_localPlayer.GetPlayerName() == "Alienx" || global::Player.m_localPlayer.GetPlayerName() == "Mrawesome")
-                                GameCamera.instance.ToggleFreeFly();
+                            GameCamera.instance.ToggleFreeFly();
                             break;
 
                         default:
@@ -138,43 +121,6 @@ namespace Mod.Harmony.System
                     global::Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Spawning object " + prefabName, 0, null);
                     Character component2 = UnityEngine.Object.Instantiate<GameObject>(prefab, global::Player.m_localPlayer.transform.position + global::Player.m_localPlayer.transform.forward * 2f + Vector3.up, Quaternion.identity).GetComponent<Character>();
                     
-                }
-            }
-        }
-
-        private void ChangeNetworkDataRate(string[] input)
-        {
-            if (input.Length != 3)
-            {
-                Console.instance.AddString("<color=red>Error: Unable to change data rate, no multiplier given</color>");
-            }
-            else
-            {
-                string value = input[2];
-                if (int.TryParse(value, out var intValue))
-                {
-                    if (intValue > 50)
-                        intValue = 50;
-
-                    if (intValue < 1)
-                        intValue = 1;
-
-                    Utilities.Logger.Log($"Player is setting data rate multiplier to a value of {intValue}");
-                    if (ZDOMan.instance == null)
-                    {
-                        Console.instance.AddString($"Scheduled to set datarate from 61440 to {61440 * intValue}");
-                        Settings.Instance.UpdateSetting(Settings.SettingTypes.NETWORK_DATA_RATE_MULTIPLIER, intValue);
-                    }
-                    else
-                    {
-                        Console.instance.AddString($"Setting datarate from {ZDOMan.instance.m_dataPerSec} to {61440 * intValue}");
-                        Settings.Instance.UpdateSetting(Settings.SettingTypes.NETWORK_DATA_RATE_MULTIPLIER, intValue);
-                        ZDOMan.instance.m_dataPerSec = 61440 * intValue;
-                    }
-                }
-                else
-                {
-                    Console.instance.AddString($"<color=red>Error: given value of \"{value}\" is not supported</color>");
                 }
             }
         }

@@ -12,17 +12,15 @@ namespace Mod.Harmony.Game
 
         private static readonly List<string> RandomShitToSay = new List<string>()
         {
-            //"I LOVE IT IN MY BUTT",
-            //"I AM CUMMING! Aaarrrrgggg!",
+            "I LOVE IT IN MY BUTT",
+            "I AM CUMMING! Aaarrrrgggg!",
             "SCRUB MY POOP DECK",
-            //"QUICKLY, FIST ME AT ONCE!",
-            //"I AM ARRIVING *splosh noises*",
-            //"SIR TW@ THE 3RD HAS ARRIVED",
+            "QUICKLY, FIST ME AT ONCE!",
+            "I AM ARRIVING *splosh noises*",
+            "SIR TW@ THE 3RD HAS ARRIVED",
             "Excuse me, have you seen my shoes?",
             "I am here to conquer your lands (and your butt!)",
             "Good day, May I interest you in the story of our lord and savouir Jebus Chryst?",
-            "Send help, the M word is being naughty!",
-            "JANUS, DO THE THING!"
         };
 
         private static bool Prefix(ref global::Game __instance, ref float dt)

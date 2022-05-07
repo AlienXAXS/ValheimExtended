@@ -61,7 +61,7 @@ namespace Mod.CustomCode.GUI
         private void OnGUI()
         {
             //GUILayout.Window(133723, new Rect(4f, 16f, Screen.width - 10f, 26f), new UnityEngine.GUI.WindowFunction(GUIWindowFunctionHandler), "", new GUILayoutOption[0]);
-            GUILayout.Label($"<color=white>Ping: {Ping}ms | Pos: {playerPosition} | Network: Transmit:{totalBytesRecv}kb/s Recieve:{totalBytesSent}kb/s LocalQuality:{(int)localNetQuality * 100f}% RemoteQuality:{(int)remoteNetQuality * 100f}%</color>", new GUIStyle() { margin = new RectOffset(15, 5, 5, 5), fontSize = 16 }, new GUILayoutOption[0]);
+            GUILayout.Label($"<color=white>Ping: {Ping}ms | Pos: {playerPosition} | Network: Transmit:{totalBytesRecv}kb/s Recieve:{totalBytesSent}kb/s LocalQuality:{(int)localNetQuality * 100f}% RemoteQuality:{(int)remoteNetQuality * 100f}%</color>", new GUIStyle() { fontSize = 16 }, new GUILayoutOption[0]); //margin = new RectOffset(15, 5, 5, 5)
         }
 
         private void GUIWindowFunctionHandler(int windowId)
@@ -71,7 +71,6 @@ namespace Mod.CustomCode.GUI
             {
 
                 GUILayout.BeginHorizontal(new GUILayoutOption[0]);
-
             }
             catch (Exception ex)
             {
